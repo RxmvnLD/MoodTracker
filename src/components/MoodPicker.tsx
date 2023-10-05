@@ -1,9 +1,20 @@
 import { FlatList, StyleSheet, Text, View, Pressable } from 'react-native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { moodOptions, theme } from '../utils/constants';
 import { MoodOptionType } from '../types';
-const MoodPicker: React.FC = () => {
+
+interface MoodListProps {
+  setMoodList: (mood: MoodOptionType) => void;
+}
+const MoodPicker: React.FC<MoodListProps> = ({ setMoodList }) => {
   const [selectedMood, setSelectedMood] = useState<MoodOptionType>();
+
+  const handleSetMoodList = useCallback(() => {
+    if (selectedMood) {
+      setMoodList(selectedMood);
+    }
+    setSelectedMood(undefined);
+  }, [selectedMood, setMoodList]);
 
   const renderItem = ({ item }: { item: MoodOptionType }) => {
     return (
@@ -35,7 +46,7 @@ const MoodPicker: React.FC = () => {
         keyExtractor={item => item.description}
         horizontal={true}
       />
-      <Pressable style={styles.chooseBtn}>
+      <Pressable style={styles.chooseBtn} onPress={handleSetMoodList}>
         <View>
           <Text style={styles.chooseBtnText}>Choose</Text>
         </View>
@@ -48,7 +59,6 @@ export default MoodPicker;
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
     borderBlockColor: theme.colorPurple,
     borderWidth: 2,
     borderRadius: 10,
