@@ -2,19 +2,17 @@ import { FlatList, StyleSheet, Text, View, Pressable } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import { moodOptions, theme } from '../utils/constants';
 import { MoodOptionType } from '../types';
+import { useAppContext } from '../../Provider';
 
-interface MoodListProps {
-  setMoodList: (mood: MoodOptionType) => void;
-}
-const MoodPicker: React.FC<MoodListProps> = ({ setMoodList }) => {
+const MoodPicker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<MoodOptionType>();
-
+  const { handleSelectedMood } = useAppContext();
   const handleSetMoodList = useCallback(() => {
     if (selectedMood) {
-      setMoodList(selectedMood);
+      handleSelectedMood(selectedMood);
     }
     setSelectedMood(undefined);
-  }, [selectedMood, setMoodList]);
+  }, [selectedMood, handleSelectedMood]);
 
   const renderItem = ({ item }: { item: MoodOptionType }) => {
     return (

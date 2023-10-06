@@ -3,14 +3,13 @@ import React from 'react';
 import { moodOptionWithTimeStamp } from '../types';
 import format from 'date-fns/format';
 import { theme } from '../utils/constants';
+import { useAppContext } from '../../Provider';
 
-interface MoodListProps {
-  list: moodOptionWithTimeStamp[];
-}
 const Separator: React.FC = () => {
   return <View style={styles.separator} />;
 };
-const MoodList: React.FC<MoodListProps> = ({ list }) => {
+const MoodList: React.FC = () => {
+  const { moodList } = useAppContext();
   const renderItem = ({
     item: { mood, timeStamp },
   }: {
@@ -32,9 +31,9 @@ const MoodList: React.FC<MoodListProps> = ({ list }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={list}
+        data={moodList}
         renderItem={renderItem}
-        keyExtractor={item => item.mood.description}
+        keyExtractor={item => item.timeStamp.toString()}
         ItemSeparatorComponent={Separator}
       />
     </View>
