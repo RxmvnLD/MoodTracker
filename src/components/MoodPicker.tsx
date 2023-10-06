@@ -11,7 +11,7 @@ import { moodOptions, theme } from '../utils/constants';
 import { MoodOptionType } from '../types';
 import { useAppContext } from '../../Provider';
 
-const imgSrc = require('../assets/butterflies.png');
+const imgSrc = require('../assets/img/butterflies.png');
 
 const MoodPicker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<MoodOptionType>();
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: theme.fontFamilyBold,
   },
   moodItem: {
     width: 60,
