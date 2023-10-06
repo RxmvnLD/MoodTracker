@@ -1,17 +1,28 @@
-import { FlatList, StyleSheet, Text, View, Pressable } from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Image,
+} from 'react-native';
 import React, { useCallback, useState } from 'react';
 import { moodOptions, theme } from '../utils/constants';
 import { MoodOptionType } from '../types';
 import { useAppContext } from '../../Provider';
 
+const imgSrc = require('../assets/butterflies.png');
+
 const MoodPicker: React.FC = () => {
   const [selectedMood, setSelectedMood] = useState<MoodOptionType>();
+  const [hasSelected, setHasSelected] = useState<boolean>(false);
   const { handleSelectedMood } = useAppContext();
   const handleSetMoodList = useCallback(() => {
     if (selectedMood) {
       handleSelectedMood(selectedMood);
+      setSelectedMood(undefined);
+      setHasSelected(true);
     }
-    setSelectedMood(undefined);
   }, [selectedMood, handleSelectedMood]);
 
   const renderItem = ({ item }: { item: MoodOptionType }) => {
@@ -32,6 +43,21 @@ const MoodPicker: React.FC = () => {
       </Pressable>
     );
   };
+
+  if (hasSelected) {
+    return (
+      <View style={styles.container}>
+        <Image source={imgSrc} />
+        <Pressable
+          style={styles.chooseBtn}
+          onPress={() => setHasSelected(false)}>
+          <View>
+            <Text style={styles.chooseBtnText}>Choose another!</Text>
+          </View>
+        </Pressable>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>

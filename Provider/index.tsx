@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { MoodOptionType, MoodOptionWithTimeStamp } from '../src/types';
-import { getData, setData } from '../src/utils/fetchLocalData';
+import { getData, setData } from '../src/utils/asyncStorageMoods';
 
 type AppContextType = {
   moodList: MoodOptionWithTimeStamp[];
