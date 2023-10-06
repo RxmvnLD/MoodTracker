@@ -89,11 +89,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
     paddingVertical: 20,
+    backgroundColor: '#00000033',
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
   },
   moodItem: {
     width: 60,
