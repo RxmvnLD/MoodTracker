@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { moodOptionWithTimeStamp } from '../types';
+import { MoodOptionWithTimeStamp } from '../types';
 import format from 'date-fns/format';
 import { theme } from '../utils/constants';
 import { useAppContext } from '../../Provider';
@@ -13,7 +13,7 @@ const MoodList: React.FC = () => {
   const renderItem = ({
     item: { mood, timeStamp },
   }: {
-    item: moodOptionWithTimeStamp;
+    item: MoodOptionWithTimeStamp;
   }) => {
     const date = format(new Date(timeStamp), "dd MMM, yyyy 'at' h:mmaaa");
     return (
